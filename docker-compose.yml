@@ -1,0 +1,22 @@
+---
+version: '3'
+
+networks:
+  fc-jenkins-network:
+
+volumes:
+  certificates:
+
+services:
+
+  jenkins:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+      - "39341:39341"
+      - "50000:50000"
+    volumes:
+      - ./certificates:/usr/share/ca-certificates/gitlab
+    env_file:
+      - "./compose${DOCKER_JENKINS_ENV_LOCAL}.env"
